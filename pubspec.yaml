@@ -1,0 +1,58 @@
+name: automotiveapp
+description: A new Flutter project.
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  line_icons: ^2.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Phuduregular
+      fonts:
+        - asset: assets/fonts/Phudu-Regular.ttf
+    - family: RobotoLight
+      fonts:
+        - asset: assets/fonts/Roboto-Light.ttf
+    - family: Lecker
+      fonts:
+        - asset: assets/fonts/LeckerliOne-Regular.ttf
+    - family: Lavish
+      fonts:
+        - asset: assets/fonts/LavishlyYours-Regular.ttf
+    - family: PhuduMedium
+      fonts:
+        - asset: assets/fonts/Phudu-Medium.ttf
+    - family: Barcode
+      fonts:
+        - asset: assets/fonts/LibreBarcode39-Regular.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        
+        
+  
+
