@@ -1,4 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
+import 'package:automotiveapp/pages/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -75,15 +76,20 @@ class _SellingPageState extends State<SellingPage> {
                       style: TextStyle(
                           color: white, fontFamily: "Roboto", fontSize: 19),
                     ),
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: pink),
-                      child: const Center(
-                        child: Icon(
-                          LineIcons.plus,
-                          color: white,
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const CartPage()));
+                      },
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle, color: pink),
+                        child: const Center(
+                          child: Icon(
+                            LineIcons.plus,
+                            color: white,
+                          ),
                         ),
                       ),
                     )
