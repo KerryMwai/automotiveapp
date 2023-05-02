@@ -1,4 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
+import 'package:automotiveapp/pages/rent_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -42,14 +43,17 @@ class _RentPageState extends State<RentPage> {
                 const Text(
                   "2023 Volvo C40",
                   style: TextStyle(
-                      color: white, fontFamily: "Roboto", fontSize: 16, fontWeight: FontWeight.w600),
+                      color: white,
+                      fontFamily: "Roboto",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
                 ),
-                  const SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
                   children: [
-                     Icon(
+                    Icon(
                       Icons.airline_seat_recline_extra,
                       color: white.withOpacity(0.5),
                     ),
@@ -66,33 +70,42 @@ class _RentPageState extends State<RentPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children:  [
-                   Row(
-                    children: [
-                       const Text(
-                      "\$120",
-                      style: TextStyle(
-                          color: white, fontFamily: "Roboto", fontSize: 17,fontWeight: FontWeight.w600),
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          "\$120",
+                          style: TextStyle(
+                              color: white,
+                              fontFamily: "Roboto",
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          "/D",
+                          style: TextStyle(
+                              color: white.withOpacity(0.5),
+                              fontFamily: "Roboto",
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
                     ),
-                    Text(
-                      "/D",
-                      style: TextStyle(
-                          color: white.withOpacity(0.5), fontFamily: "Roboto", fontSize: 17,fontWeight: FontWeight.w600),
-                    ),
-
-                    ],
-                   ),
-                   GestureDetector(
-                    onTap: (){},
-                     child: const Icon(
-                       LineIcons.arrowRight,
-                       size: 35,
-                       color: orange,
-                     ),
-                   )
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RentDetailPage()));
+                      },
+                      child: const Icon(
+                        LineIcons.arrowRight,
+                        size: 35,
+                        color: orange,
+                      ),
+                    )
                   ],
                 )
               ],
