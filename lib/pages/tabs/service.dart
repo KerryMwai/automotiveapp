@@ -1,4 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
+import 'package:automotiveapp/pages/part_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -56,14 +57,19 @@ class _ServicesPageState extends State<ServicesPage> {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: orange,
-                          borderRadius: BorderRadius.circular(8),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const PartDetailPage()));
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: orange,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text("Repair"),
                         ),
-                        child: const Text("Repair"),
                       )
                     ],
                   ),
@@ -97,18 +103,18 @@ class _ServicesPageState extends State<ServicesPage> {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(left: 4, top: 9, right: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(colors: [
-                  white.withOpacity(0.4),
-                  white.withOpacity(0.3),
-                  white.withOpacity(0.2),
-                  white.withOpacity(0.1),
-                ])
-              ),
-            )
+            // Container(
+            //   margin: const EdgeInsets.only(left: 4, top: 9, right: 5),
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(20),
+            //     gradient: LinearGradient(colors: [
+            //       white.withOpacity(0.4),
+            //       white.withOpacity(0.3),
+            //       white.withOpacity(0.2),
+            //       white.withOpacity(0.1),
+            //     ])
+            //   ),
+            // )
           ]);
         }));
   }
