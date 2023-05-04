@@ -1,4 +1,5 @@
 import 'package:automotiveapp/pages/home_page.dart';
+import 'package:automotiveapp/pages/signin_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Automotive App',
-      home:HomePage(),
+      home:SignInPage(),
       debugShowCheckedModeBanner: false,
     );
   }
