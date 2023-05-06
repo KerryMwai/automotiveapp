@@ -1,4 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
+import 'package:automotiveapp/models/app_infor.dart';
 import 'package:automotiveapp/pages/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -18,7 +19,7 @@ class _SellingPageState extends State<SellingPage> {
         childAspectRatio: 2 / 3,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        children: List.generate(10, (index) {
+        children: List.generate(sellingItems.length, (index) {
           return Container(
             margin: const EdgeInsets.only(left: 5, top: 10, right: 5),
             padding: const EdgeInsets.all(20),
@@ -33,8 +34,8 @@ class _SellingPageState extends State<SellingPage> {
                   height: 80,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: const DecorationImage(
-                        image: AssetImage("assets/images/brake2.jpg"),
+                      image:  DecorationImage(
+                        image: AssetImage(sellingItems[index]['image']),
                         fit: BoxFit.cover,
                       )),
                 ),
@@ -51,7 +52,7 @@ class _SellingPageState extends State<SellingPage> {
                       width: 4,
                     ),
                     Text(
-                      "4.9",
+                      sellingItems[index]['rating'].toString(),
                       style: TextStyle(
                           color: white.withOpacity(0.6), fontSize: 18),
                     )
@@ -60,9 +61,9 @@ class _SellingPageState extends State<SellingPage> {
                 const SizedBox(
                   height: 5,
                 ),
-                const Text(
-                  "Brake pad",
-                  style: TextStyle(
+                 Text(
+                  sellingItems[index]['name'],
+                  style:const TextStyle(
                       color: white, fontFamily: "Roboto", fontSize: 19),
                 ),
                 const SizedBox(
@@ -71,9 +72,9 @@ class _SellingPageState extends State<SellingPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "\$120",
-                      style: TextStyle(
+                     Text(
+                      "\$${sellingItems[index]['price']}",
+                      style:const TextStyle(
                           color: white, fontFamily: "Roboto", fontSize: 19),
                     ),
                     GestureDetector(

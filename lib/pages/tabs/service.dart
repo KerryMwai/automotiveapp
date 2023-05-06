@@ -1,4 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
+import 'package:automotiveapp/models/app_infor.dart';
 import 'package:automotiveapp/pages/part_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -18,7 +19,7 @@ class _ServicesPageState extends State<ServicesPage> {
         childAspectRatio: 2 / 3,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        children: List.generate(10, (index) {
+        children: List.generate(services.length, (index) {
           return Stack(children: [
             Container(
               margin: const EdgeInsets.only(left: 5, top: 10, right: 5),
@@ -30,10 +31,10 @@ class _ServicesPageState extends State<ServicesPage> {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 110,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
+                    decoration:  BoxDecoration(
+                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
                         image: DecorationImage(
-                            image: AssetImage("assets/images/reapir.jpg"),
+                            image: AssetImage(services[index]['image']),
                             fit: BoxFit.fill)),
                   ),
                   const SizedBox(
@@ -76,9 +77,9 @@ class _ServicesPageState extends State<ServicesPage> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text(
-                    "Repair Service",
-                    style: TextStyle(
+                   Text(
+                    services[index]['name'],
+                    style:const TextStyle(
                         color: white, fontFamily: "Roboto", fontSize: 19),
                   ),
                   const SizedBox(

@@ -1,4 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
+import 'package:automotiveapp/models/app_infor.dart';
 import 'package:automotiveapp/pages/rent_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -18,7 +19,7 @@ class _RentPageState extends State<RentPage> {
         childAspectRatio: 2 / 3,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        children: List.generate(10, (index) {
+        children: List.generate(rentCars.length, (index) {
           return Container(
             margin: const EdgeInsets.only(left: 5, top: 10, right: 5),
             padding: const EdgeInsets.all(20),
@@ -32,17 +33,17 @@ class _RentPageState extends State<RentPage> {
                   height: 80,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: const DecorationImage(
-                        image: AssetImage("assets/images/car22.png"),
+                      image:  DecorationImage(
+                        image: AssetImage(rentCars[index]['image']),
                         fit: BoxFit.contain,
                       )),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
-                const Text(
-                  "2023 Volvo C40",
-                  style: TextStyle(
+                 Text(
+                  rentCars[index]['name'],
+                  style:const TextStyle(
                       color: white,
                       fontFamily: "Roboto",
                       fontSize: 16,
@@ -61,7 +62,7 @@ class _RentPageState extends State<RentPage> {
                       width: 10,
                     ),
                     Text(
-                      "4 Seat",
+                      "${rentCars[index]['seats']} Seat",
                       style: TextStyle(
                           color: white.withOpacity(0.6), fontSize: 18),
                     )
@@ -75,9 +76,9 @@ class _RentPageState extends State<RentPage> {
                   children: [
                     Row(
                       children: [
-                        const Text(
-                          "\$120",
-                          style: TextStyle(
+                         Text(
+                          "\$${rentCars[index]['price']}",
+                          style: const TextStyle(
                               color: white,
                               fontFamily: "Roboto",
                               fontSize: 17,
