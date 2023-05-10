@@ -23,17 +23,11 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: black,
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: IndexedStack(
-          index: bottomActiveIndex,
-          children:const [
-            Home(),
-             LocationPage(),
-            Help(),
-            Profile()
-          ],
-        )
-      )),
+              padding: const EdgeInsets.all(4.0),
+              child: IndexedStack(
+                index: bottomActiveIndex,
+                children: const [Home(), LocationPage(), Help(), Profile()],
+              ))),
       bottomNavigationBar: Container(
         width: size.width,
         height: 75.0,

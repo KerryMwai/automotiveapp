@@ -1,10 +1,13 @@
 import 'package:automotiveapp/constants/colors.dart';
+import 'package:automotiveapp/models/user.dart';
 import 'package:automotiveapp/pages/home_page.dart';
 import 'package:automotiveapp/pages/signin_page.dart';
+import 'package:automotiveapp/users_management/user_authority.dart';
 import 'package:automotiveapp/widgets/custom_header_text.dart';
 import 'package:automotiveapp/widgets/sign_button.dart';
 import 'package:automotiveapp/widgets/text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -76,10 +79,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         Text(
                           "By creating an account, you agree to the",
                           style: TextStyle(
-                              color: white.withOpacity(0.3),
-                              wordSpacing: 4,
-                              fontSize: 14,
-                        ),
+                            color: white.withOpacity(0.3),
+                            wordSpacing: 4,
+                            fontSize: 14,
+                          ),
                         )
                       ],
                     ),
@@ -99,14 +102,13 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                         Text(
-                            " and ",
-                            style: TextStyle(
-                                color: white.withOpacity(0.3),
-                                fontSize: 14,
-                                ),
+                          " and ",
+                          style: TextStyle(
+                            color: white.withOpacity(0.3),
+                            fontSize: 14,
                           ),
-                        
-                         GestureDetector(
+                        ),
+                        GestureDetector(
                           onTap: () {
                             print("Privacy and Policy");
                           },
@@ -120,29 +122,41 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ],
                     ),
-
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePage()));
+                        onTap: () async {
+                          final userAuth = UserAuthorization();
+                          await userAuth
+                              .signUpUser(UserModel(
+                                  userEmail: emailController.text,
+                                  userPassword: passwordController.text))
+                              .then((value) => context.go("/Home"))
+                              .catchError((e)=>print(e));
+                        },
+                        child: const SignButton(
+                          buttonText: "Sign Up",
+                        )),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignInPage()));
                       },
-                      child:const SignButton(buttonText: "Sign Up",)),
-
-                      const SizedBox(height: 50,),
-                      
-                          GestureDetector(
-                          onTap: () {
-                             Navigator.push(context, MaterialPageRoute(builder: (context)=>const SignInPage()));
-                          },
-                          child: Text(
-                            "I am already a member",
-                            style: TextStyle(
-                                color: white.withOpacity(0.3),
-                                fontSize: 16,
-                                letterSpacing: 1.4,
-                                decoration: TextDecoration.underline),
-                          ),
-                        ),
+                      child: Text(
+                        "I am already a member",
+                        style: TextStyle(
+                            color: white.withOpacity(0.3),
+                            fontSize: 16,
+                            letterSpacing: 1.4,
+                            decoration: TextDecoration.underline),
+                      ),
+                    ),
                   ],
                 )
               ],

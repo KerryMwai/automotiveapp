@@ -1,12 +1,12 @@
-import 'dart:ui';
-
 import 'package:automotiveapp/constants/colors.dart';
-import 'package:automotiveapp/pages/home_page.dart';
+import 'package:automotiveapp/models/user.dart';
 import 'package:automotiveapp/pages/signup_page.dart';
+import 'package:automotiveapp/users_management/user_authority.dart';
 import 'package:automotiveapp/widgets/custom_header_text.dart';
 import 'package:automotiveapp/widgets/sign_button.dart';
 import 'package:automotiveapp/widgets/text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -29,9 +29,11 @@ class _SignInPageState extends State<SignInPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomHeaderText(title: "Hello there,\nwelcome back",),
+              const CustomHeaderText(
+                title: "Hello there,\nwelcome back",
+              ),
               const SizedBox(
-                height: 60,
+                height: 50,
               ),
               CustomTextField2(
                 size: size,
@@ -75,8 +77,14 @@ class _SignInPageState extends State<SignInPage> {
                     height: 50,
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePage()));
+                    onTap: () async {
+                      final userAuth = UserAuthorization();
+                      await userAuth
+                          .signInUser(UserModel(
+                              userEmail: emailController.text,
+                              userPassword: passwordController.text))
+                          .then((value) => context.go("/Home"))
+                          .catchError((e) => print(e));
                     },
                     child: const SignButton(
                       buttonText: "Sign In",

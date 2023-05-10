@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1040747138095",
+    "project_id": "senior-and-more",
+    "storage_bucket": "senior-and-more.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040747138095:android:eee28e958a7053a24a4ada",
+        "android_client_info": {
+          "package_name": "com.example.automotiveapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040747138095-ma2mrje7qt0rfbjcfbciph7cl8l7utgj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzAM9S1xgLYs6hn7tk70SNul6rQbKDcyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040747138095-ma2mrje7qt0rfbjcfbciph7cl8l7utgj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,7 @@ import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/models/app_infor.dart';
 import 'package:automotiveapp/pages/cart.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
 
 class SellingPage extends StatefulWidget {
@@ -78,9 +79,7 @@ class _SellingPageState extends State<SellingPage> {
                           color: white, fontFamily: "Roboto", fontSize: 19),
                     ),
                     GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const CartPage()));
-                      },
+                      onTap: ()=>context.go("/cart"),
                       child: Container(
                         width: 30,
                         height: 30,

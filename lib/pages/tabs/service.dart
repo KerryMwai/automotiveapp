@@ -2,6 +2,7 @@ import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/models/app_infor.dart';
 import 'package:automotiveapp/pages/part_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
 
 class ServicesPage extends StatefulWidget {
@@ -59,9 +60,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const PartDetailPage()));
-                        },
+                        onTap: ()=>context.go("/PartDetails"),
                         child: Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 5),

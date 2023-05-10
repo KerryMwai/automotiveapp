@@ -2,6 +2,7 @@ import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/models/app_infor.dart';
 import 'package:automotiveapp/pages/rent_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
 
 class RentPage extends StatefulWidget {
@@ -95,12 +96,7 @@ class _RentPageState extends State<RentPage> {
                       ],
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const RentDetailPage()));
-                      },
+                      onTap: ()=>context.go("/RentCarDetail"),
                       child: const Icon(
                         LineIcons.arrowRight,
                         size: 35,
