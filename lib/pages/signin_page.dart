@@ -1,7 +1,7 @@
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/models/user.dart';
 import 'package:automotiveapp/pages/signup_page.dart';
-import 'package:automotiveapp/users_management/user_authority.dart';
+import 'package:automotiveapp/firebase/user_authority.dart';
 import 'package:automotiveapp/widgets/custom_header_text.dart';
 import 'package:automotiveapp/widgets/sign_button.dart';
 import 'package:automotiveapp/widgets/text_field.dart';

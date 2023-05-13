@@ -5,6 +5,7 @@ import 'package:automotiveapp/pages/part_detail_page.dart';
 import 'package:automotiveapp/pages/rent_detail_page.dart';
 import 'package:automotiveapp/pages/signin_page.dart';
 import 'package:automotiveapp/pages/signup_page.dart';
+import 'package:automotiveapp/pages/test_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -52,6 +53,11 @@ final GoRouter _router = GoRouter(routes: [
             path: "cart",
             builder: (BuildContext context, GoRouterState state) {
               return const CartPage();
+            }),
+        GoRoute(
+            path: "test",
+            builder: (BuildContext context, GoRouterState state) {
+              return const TestPage();
             }),
       ])
 ]);
