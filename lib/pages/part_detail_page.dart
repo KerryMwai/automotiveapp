@@ -1,6 +1,7 @@
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PartDetailPage extends StatefulWidget {
   const PartDetailPage({super.key});
@@ -22,7 +23,7 @@ class _PartDetailPageState extends State<PartDetailPage> {
             Container(
                 padding: const EdgeInsets.only(top: 10, left: 20),
                 child: IconButton(
-                    onPressed: () {Navigator.pop(context);},
+                    onPressed: () =>context.go("/Home"),
                     icon: const Icon(
                       Icons.arrow_back_ios,
                       color: white,

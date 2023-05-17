@@ -1,5 +1,6 @@
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RentDetailPage extends StatefulWidget {
   const RentDetailPage({super.key});
@@ -15,6 +16,7 @@ class _RentDetailPageState extends State<RentDetailPage> {
     return Scaffold(
       backgroundColor: black,
       appBar: AppBar(
+        leading: IconButton(onPressed: () =>context.go("/Home"), icon: const Icon(Icons.arrow_back_ios)),
         backgroundColor: black,
         elevation: 0.0,
         title: const Text(

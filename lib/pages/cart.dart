@@ -1,6 +1,7 @@
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -21,9 +22,7 @@ class _CartPageState extends State<CartPage> {
         leading: Container(
           margin: const EdgeInsets.only(top: 20.0, left: 20.0),
           child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: () =>context.go("/Home"),
               icon: const Icon(Icons.arrow_back_ios)),
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:automotiveapp/pages/tabs/selling.dart';
 import 'package:automotiveapp/pages/tabs/service.dart';
 import 'package:automotiveapp/widgets/tab_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -65,16 +66,19 @@ class _HomeState extends State<Home> {
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  children: const [
-                                    Text(
+                                  children:  [
+                                    const Text(
                                       "Explore Now",
                                       style:
                                           TextStyle(color: white, fontSize: 16),
                                     ),
-                                    Icon(
-                                      LineIcons.arrowCircleRight,
-                                      color: white,
-                                      size: 25,
+                                    GestureDetector(
+                                      onTap: ()=>context.go("/UploadFile"),
+                                      child: const Icon(
+                                        LineIcons.arrowCircleRight,
+                                        color: white,
+                                        size: 25,
+                                      ),
                                     )
                                   ],
                                 ),
