@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
                                           TextStyle(color: white, fontSize: 16),
                                     ),
                                     GestureDetector(
-                                      onTap: ()=>context.go("/test"),
+                                      onTap: ()=>context.go("/UploadFile"),
                                       child: const Icon(
                                         LineIcons.arrowCircleRight,
                                         color: white,

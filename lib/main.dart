@@ -1,11 +1,14 @@
 import 'package:automotiveapp/notifiers/service_notifier.dart';
 import 'package:automotiveapp/pages/cart.dart';
+import 'package:automotiveapp/pages/firebase/image_page.dart';
+import 'package:automotiveapp/pages/firebase/upload_to_firebase_storage.dart';
+import 'package:automotiveapp/pages/firebase/view_files_from_firebase.dart';
 import 'package:automotiveapp/pages/home_page.dart';
 import 'package:automotiveapp/pages/part_detail_page.dart';
 import 'package:automotiveapp/pages/rent_detail_page.dart';
 import 'package:automotiveapp/pages/signin_page.dart';
 import 'package:automotiveapp/pages/signup_page.dart';
-import 'package:automotiveapp/pages/test_page.dart';
+import 'package:automotiveapp/pages/firebase/download_from_firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +20,8 @@ Future<void> main() async {
       apiKey: "AIzaSyBzAM9S1xgLYs6hn7tk70SNul6rQbKDcyI",
       appId: "1:1040747138095:android:eee28e958a7053a24a4ada",
       messagingSenderId: "1040747138095",
-      projectId: "senior-and-more");
+      projectId: "senior-and-more",
+      storageBucket: 'gs://senior-and-more.appspot.com');
   await Firebase.initializeApp(options: options);
   runApp(const RootApp());
 }
@@ -55,9 +59,24 @@ final GoRouter _router = GoRouter(routes: [
               return const CartPage();
             }),
         GoRoute(
-            path: "test",
+            path: "ViewFiles",
             builder: (BuildContext context, GoRouterState state) {
-              return const TestPage();
+              return const FilesFromFirebasePage();
+            }),
+        // GoRoute(
+        //     path: "ImagePage",
+        //     builder: (BuildContext context, GoRouterState state) {
+        //       return const ImagePage();
+        //     }),
+        GoRoute(
+            path: "DownloadFile",
+            builder: (BuildContext context, GoRouterState state) {
+              return const DownloadFilePage();
+            }),
+        GoRoute(
+            path: "UploadFile",
+            builder: (BuildContext context, GoRouterState state) {
+              return const UploadFilePage();
             }),
       ])
 ]);
@@ -72,9 +91,9 @@ class RootApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => ServiceChangeNotifer())
       ],
-      child:MaterialApp.router(
-          routerConfig: _router,
-          debugShowCheckedModeBanner: false,
+      child: MaterialApp.router(
+        routerConfig: _router,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
