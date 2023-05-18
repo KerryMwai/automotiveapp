@@ -1,5 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
-
+// https://editorial.rottentomatoes.com/guide/best-horror-movies-of-all-time/
 class FirebaseApi {
   static Future<List<String>> _getDownloadLinks(List<Reference> refs) =>
       Future.wait(refs.map((ref) => ref.getDownloadURL()).toList());
@@ -18,6 +18,11 @@ class FirebaseApi {
         return MapEntry(key, file);
       }).values.toList();
   }
+
+  static Future<void> delete(String ref)async{
+    await FirebaseStorage.instance.ref(ref).delete();
+  }
+  
 }
 
 
