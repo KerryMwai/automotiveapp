@@ -1,6 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/models/user.dart';
-import 'package:automotiveapp/pages/home_page.dart';
 import 'package:automotiveapp/pages/signin_page.dart';
 import 'package:automotiveapp/firebase/user_authority.dart';
 import 'package:automotiveapp/widgets/custom_header_text.dart';

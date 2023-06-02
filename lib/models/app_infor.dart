@@ -33,6 +33,10 @@ List bottomNavInformation = [
     "title": "Profile",
     "icon": Icons.person,
   },
+  {
+    "title": "Admin",
+    "icon": Icons.admin_panel_settings,
+  },
 ];
 List<String> pageTitles = [
   "Vehicle Services",

@@ -24,7 +24,7 @@ class _FilesFromFirebasePageState extends State<FilesFromFirebasePage> {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(onPressed: ()=>context.go("/UploadFile"), icon:const Icon(Icons.arrow_back_ios)),
-          title: const Text("Files from storage rent bucket"),
+          title: const Text("Cars for Renting"),
           centerTitle: true,
         ),
         body: FutureBuilder<List<FirebaseFile>>(

@@ -26,6 +26,7 @@ class _HelpState extends State<Help> {
         centerTitle: true,
       ),
       backgroundColor: black,
+      
       body: SafeArea(child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: ListView(

@@ -1,9 +1,11 @@
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/models/app_infor.dart';
+import 'package:automotiveapp/pages/logout.dart';
 import 'package:automotiveapp/pages/pagesasperbottomnav/help.dart';
 import 'package:automotiveapp/pages/pagesasperbottomnav/home.dart';
 import 'package:automotiveapp/pages/pagesasperbottomnav/location.dart';
 import 'package:automotiveapp/pages/pagesasperbottomnav/profile.dart';
+import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/widgets/nav_button.dart';
 import 'package:flutter/material.dart';
 
@@ -21,12 +23,13 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: black,
+      drawer:const SafeArea(child:   CustomDrawer()),
       body: SafeArea(
           child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: IndexedStack(
                 index: bottomActiveIndex,
-                children: const [Home(), LocationPage(), Help(), Profile()],
+                children: const [Home(), LocationPage(), Help(), Profile(), LogoutPage()],
               ))),
       bottomNavigationBar: Container(
         width: size.width,
