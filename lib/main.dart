@@ -1,9 +1,12 @@
-import 'package:automotiveapp/notifiers/service_notifier.dart';
+import 'package:automotiveapp/controller/automotive_changenotifier.dart';
+import 'package:automotiveapp/pages/admin/manager/rent.dart';
+import 'package:automotiveapp/pages/admin/manager/selling.dart';
+import 'package:automotiveapp/pages/admin/manager/service.dart';
 import 'package:automotiveapp/pages/cart.dart';
-import 'package:automotiveapp/pages/firebase/image_page.dart';
 import 'package:automotiveapp/pages/firebase/upload_to_firebase_storage.dart';
 import 'package:automotiveapp/pages/firebase/view_files_from_firebase.dart';
 import 'package:automotiveapp/pages/home_page.dart';
+import 'package:automotiveapp/pages/pagesasperbottomnav/profile.dart';
 import 'package:automotiveapp/pages/part_detail_page.dart';
 import 'package:automotiveapp/pages/rent_detail_page.dart';
 import 'package:automotiveapp/pages/signin_page.dart';
@@ -23,7 +26,10 @@ Future<void> main() async {
       projectId: "senior-and-more",
       storageBucket: 'gs://senior-and-more.appspot.com');
   await Firebase.initializeApp(options: options);
-  runApp(const RootApp());
+  runApp(ChangeNotifierProvider(
+    create: (_) => AutomotiveChangeNotifier(),
+    child: const RootApp(),
+  ));
 }
 
 final GoRouter _router = GoRouter(routes: [
@@ -63,11 +69,17 @@ final GoRouter _router = GoRouter(routes: [
             builder: (BuildContext context, GoRouterState state) {
               return const FilesFromFirebasePage();
             }),
-        // GoRoute(
-        //     path: "ImagePage",
-        //     builder: (BuildContext context, GoRouterState state) {
-        //       return const ImagePage();
-        //     }),
+        GoRoute(
+            path: "service_management",
+            builder: ((context, state) => const ServiceManagerPage())),
+        GoRoute(
+            path: "selling_management",
+            builder: ((context, state) => const SellManagerPage())),
+        GoRoute(
+            path: "rent_management",
+            builder: ((context, state) => const RentManagerPage())),
+        GoRoute(
+            path: "profile", builder: ((context, state) => const Profile())),
         GoRoute(
             path: "DownloadFile",
             builder: (BuildContext context, GoRouterState state) {
@@ -87,14 +99,9 @@ class RootApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => ServiceChangeNotifer())
-      ],
-      child: MaterialApp.router(
+    return  MaterialApp.router(
         routerConfig: _router,
         debugShowCheckedModeBanner: false,
-      ),
-    );
+      );
   }
 }

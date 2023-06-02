@@ -1,7 +1,8 @@
+import 'package:automotiveapp/firebase/storage_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-// https://editorial.rottentomatoes.com/guide/best-horror-movies-of-all-time/
-// https://pub.dev/packages/flutter_native_splash
-class FirebaseApi {
+
+class AutomotiveApi {
+
   static Future<List<String>> _getDownloadLinks(List<Reference> refs) =>
       Future.wait(refs.map((ref) => ref.getDownloadURL()).toList());
 
@@ -26,11 +27,3 @@ class FirebaseApi {
   
 }
 
-
-class FirebaseFile{
-  final Reference ref;
-  final String name;
-  final String url;
-
-  FirebaseFile({required this.ref, required this.name, required this.url});
-}

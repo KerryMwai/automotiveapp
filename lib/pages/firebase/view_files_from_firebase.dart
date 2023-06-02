@@ -23,7 +23,8 @@ class _FilesFromFirebasePageState extends State<FilesFromFirebasePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Files from storage rent bucket"),
+          leading: IconButton(onPressed: ()=>context.go("/UploadFile"), icon:const Icon(Icons.arrow_back_ios)),
+          title: const Text("Cars for Renting"),
           centerTitle: true,
         ),
         body: FutureBuilder<List<FirebaseFile>>(
@@ -89,6 +90,12 @@ class _FilesFromFirebasePageState extends State<FilesFromFirebasePage> {
               decoration: TextDecoration.underline
             ),
           ),
+          trailing: IconButton(onPressed: (){
+            setState(() {
+              FirebaseApi.delete("renting/${file.name}");
+            });
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Deleted successfully")));
+          }, icon: const Icon(Icons.delete, color: pink, size: 40,)),
       ),
     );
   }
