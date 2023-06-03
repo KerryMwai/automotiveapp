@@ -32,7 +32,7 @@ class CustomTextField2 extends StatelessWidget {
         controller: inputController,
         cursorColor: brown,
         style: TextStyle(
-          color: white.withOpacity(0.4),
+          color: brown.withOpacity(0.4),
           fontSize: 18,
           letterSpacing: 1.2,
         ),

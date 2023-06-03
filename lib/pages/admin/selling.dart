@@ -2,6 +2,7 @@ import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/firebase/storage_service.dart';
 import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -40,8 +41,8 @@ class _SellManagerPageState extends State<SellManagerPage> {
           ],
         ),
         drawer: const CustomDrawer(),
-        body: FutureBuilder<List<FirebaseFile>>(
-            future: sellings,
+        body: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseStorageApis().fetchAllSellItems(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 const Center(
@@ -52,11 +53,11 @@ class _SellManagerPageState extends State<SellManagerPage> {
               }
 
               if (snapshot.hasData) {
-                final files = snapshot.data;
+                final sellingdocs = snapshot.data!.docs;
 
                 return ListView(
-                  children: List.generate(files!.length, (index) {
-                    final file = files[index];
+                  children: List.generate(sellingdocs.length, (index) {
+                    final singledoc = sellingdocs[index];
                     return Card(
                       margin: const EdgeInsets.all(10),
                       color: Colors.grey,
@@ -74,7 +75,7 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                       borderRadius: BorderRadius.circular(10),
                                       // color: Colors.amber,
                                       image: DecorationImage(
-                                          image: NetworkImage(file.url),
+                                          image: NetworkImage(singledoc['url']),
                                           fit: BoxFit.cover)),
                                 ),
                                 Row(
@@ -98,43 +99,48 @@ class _SellManagerPageState extends State<SellManagerPage> {
                             const SizedBox(
                               height: 20,
                             ),
-                            const Column(
+                             Column(
                               children: [
+                                   Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    singledoc['name'],
+                                    style: const TextStyle(
+                                        color: black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                 const SizedBox(
+                                  height: 15,
+                                ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "\$140/D",
-                                      style: TextStyle(
+                                      "\$ ${singledoc['price']}",
+                                      style: const TextStyle(
                                           color: black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500),
                                     ),
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.star,
                                           color: Colors.orange,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 6,
                                         ),
-                                        Text("4.8")
+                                       Text(singledoc['rate'].toString())
                                       ],
                                     )
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  "Piston ring",
-                                  style: TextStyle(
-                                      color: black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                ),
+                               
+                             
                               ],
                             ),
                             const SizedBox(

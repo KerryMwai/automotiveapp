@@ -90,7 +90,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            pickedFile==null?const Text("Please pick a file"):Expanded(child:Container(
+            pickedFile==null?const Center(child:  Text("Please pick a file")):Expanded(child:Container(
               color: blue[100],
               child: Center(
                 // child: Text(pickedFile!.name),

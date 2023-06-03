@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:automotiveapp/constants/colors.dart';
-import 'package:automotiveapp/widgets/custom_button.dart';
+import 'package:automotiveapp/models/selling_model.dart';
+import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:automotiveapp/widgets/text_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -19,6 +20,7 @@ class _AddSellingPartState extends State<AddSellingPart> {
   TextEditingController nameController=TextEditingController();
   TextEditingController rateController=TextEditingController();
   TextEditingController priceController=TextEditingController();
+  late String urlDownload;
 
 // Handling file upload
 
@@ -41,7 +43,8 @@ class _AddSellingPartState extends State<AddSellingPart> {
     });
 
     final snapshot=await uploadTask!.whenComplete((){});
-    final urlDownload=await snapshot.ref.getDownloadURL();
+    urlDownload=await snapshot.ref.getDownloadURL();
+
     print("Download link: $urlDownload");
     uploadTask=null;
   }
@@ -80,14 +83,6 @@ class _AddSellingPartState extends State<AddSellingPart> {
 
 
 
-
-
-
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
@@ -120,6 +115,8 @@ class _AddSellingPartState extends State<AddSellingPart> {
             )),
             ),
             const SizedBox(height: 10,),
+            buildProgress(),
+            const SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -139,7 +136,24 @@ class _AddSellingPartState extends State<AddSellingPart> {
             const SizedBox(height: 20,),
             CustomTextField2(size: size, inputController: priceController, obsecureText: false, labeltext: "Rental price"),
             const SizedBox(height: 30,),
-            CustomButton(titleText: "Add Product", onPressed: (){})
+            ElevatedButton(onPressed: (){
+              FirebaseStorageApis().addSelling(SellingModel(name: nameController.text, price: double.parse(priceController.text), rate: double.parse(rateController.text), url: urlDownload)).then((value){
+                nameController.clear();
+                priceController.clear();
+                rateController.clear();
+                urlDownload='';
+              }).then((value) => {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Car added successfully"))
+                )
+              });
+            }, child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Text("Add Product"),
+              SizedBox(width: 10,),
+              Icon(Icons.add)
+            ],))
           ],
         ),
       ),
