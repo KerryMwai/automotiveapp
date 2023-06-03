@@ -74,7 +74,7 @@ class FirebaseStorageApis {
   }
 
 // Handling deletion
-  static Future<void> deleteImagefromFirebaseStorage(String ref) async {
+   Future<void> deleteImagefromFirebaseStorage(String ref) async {
     await FirebaseStorage.instance.ref(ref).delete();
   }
 

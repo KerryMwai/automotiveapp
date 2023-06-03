@@ -87,7 +87,20 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                           color: Colors.green,
                                         )),
                                     IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          FirebaseStorageApis()
+                                              .deleteImagefromFirebaseStorage(
+                                                  singledoc['image_name'])
+                                              .then((value) =>
+                                                  FirebaseStorageApis()
+                                                      .deleteSellingDocument(
+                                                          singledoc.id))
+                                              .then((value) => ScaffoldMessenger
+                                                      .of(context)
+                                                  .showSnackBar(const SnackBar(
+                                                      content: Text(
+                                                          "Deleted successfully"))));
+                                        },
                                         icon: const Icon(
                                           Icons.delete,
                                           color: Colors.red,
@@ -99,9 +112,9 @@ class _SellManagerPageState extends State<SellManagerPage> {
                             const SizedBox(
                               height: 20,
                             ),
-                             Column(
+                            Column(
                               children: [
-                                   Align(
+                                Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     singledoc['name'],
@@ -111,12 +124,12 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
-                                 const SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                       MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "\$ ${singledoc['price']}",
@@ -134,13 +147,11 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                         const SizedBox(
                                           width: 6,
                                         ),
-                                       Text(singledoc['rate'].toString())
+                                        Text(singledoc['rate'].toString())
                                       ],
                                     )
                                   ],
                                 ),
-                               
-                             
                               ],
                             ),
                             const SizedBox(
