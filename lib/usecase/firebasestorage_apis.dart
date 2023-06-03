@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:automotiveapp/firebase/storage_service.dart';
+import 'package:automotiveapp/models/rental_model.dart';
+import 'package:automotiveapp/models/selling_model.dart';
 import 'package:automotiveapp/models/service_model.dart';
 import 'package:automotiveapp/respository/automotive_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -79,11 +81,35 @@ class FirebaseStorageApis {
 
 
   // Firebasefirestore operations
+  Stream<QuerySnapshot> fetchAllSellItems(){
+      return firestorInstance.collection("selling").snapshots();
+  }
+
+
   Future<void> addService(ServiceModel service)async{
     CollectionReference automotiveReference=firestorInstance.collection("services");
     automotiveReference.add({
       'name':service.name,
       'url':service.downloadurl
+    });
+  }
+
+    Future<void> addSelling(SellingModel selling)async{
+    CollectionReference automotiveReference=firestorInstance.collection("selling");
+    automotiveReference.add({
+      'name':selling.name,
+      'price':selling.price,
+      'rate':selling.rate,
+      'url':selling.url
+    });
+  }
+
+    Future<void> addRentalCar(RentalModel rentalcar)async{
+    CollectionReference automotiveReference=firestorInstance.collection("renting");
+    automotiveReference.add({
+      'name':rentalcar.name,
+      'seats':rentalcar.seats,
+      'url':rentalcar.url
     });
   }
 }
