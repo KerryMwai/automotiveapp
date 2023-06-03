@@ -21,6 +21,7 @@ class _AddSellingPartState extends State<AddSellingPart> {
   TextEditingController rateController=TextEditingController();
   TextEditingController priceController=TextEditingController();
   late String urlDownload;
+  late String filename;
 
 // Handling file upload
 
@@ -36,6 +37,7 @@ class _AddSellingPartState extends State<AddSellingPart> {
  Future  uploadFile()async{
     final path='renting/${pickedFile!.name}';
     final file=File(pickedFile!.path!);
+    final filename=pickedFile!.name;
 
     final ref=FirebaseStorage.instance.ref().child(path);
     setState(() {
@@ -45,7 +47,10 @@ class _AddSellingPartState extends State<AddSellingPart> {
     final snapshot=await uploadTask!.whenComplete((){});
     urlDownload=await snapshot.ref.getDownloadURL();
 
+
     print("Download link: $urlDownload");
+    print("______________________________________");
+    print("File name is: $filename");
     uploadTask=null;
   }
  buildProgress()=>StreamBuilder<TaskSnapshot>(
@@ -137,7 +142,7 @@ class _AddSellingPartState extends State<AddSellingPart> {
             CustomTextField2(size: size, inputController: priceController, obsecureText: false, labeltext: "Rental price"),
             const SizedBox(height: 30,),
             ElevatedButton(onPressed: (){
-              FirebaseStorageApis().addSelling(SellingModel(name: nameController.text, price: double.parse(priceController.text), rate: double.parse(rateController.text), url: urlDownload)).then((value){
+              FirebaseStorageApis().addSelling(SellingModel(name: nameController.text, price: double.parse(priceController.text), rate: double.parse(rateController.text), url: urlDownload, imageName: filename)).then((value){
                 nameController.clear();
                 priceController.clear();
                 rateController.clear();
@@ -147,9 +152,9 @@ class _AddSellingPartState extends State<AddSellingPart> {
                   const SnackBar(content: Text("Car added successfully"))
                 )
               });
-            }, child: const Row(
+            }, child:  Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
               Text("Add Product"),
               SizedBox(width: 10,),
               Icon(Icons.add)

@@ -79,12 +79,12 @@ class _RentManagerPageState extends State<RentManagerPage> {
                           ],
                         ),
                         const SizedBox(height: 20,),
-                        const Row(
+                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("2023 Nissan", style: TextStyle(color: black, fontSize: 18, fontWeight: FontWeight.w500),),
+                            const Text("2023 Nissan", style: TextStyle(color: black, fontSize: 18, fontWeight: FontWeight.w500),),
                             Row(
-                              children: [
+                              children: const [
                                 Icon(Icons.airline_seat_recline_extra),
                                 SizedBox(width: 10,),
                                 Text("6 Seat", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)

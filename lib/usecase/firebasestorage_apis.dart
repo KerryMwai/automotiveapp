@@ -74,7 +74,7 @@ class FirebaseStorageApis {
   }
 
 // Handling deletion
-  static Future<void> delete(String ref) async {
+  static Future<void> deleteImagefromFirebaseStorage(String ref) async {
     await FirebaseStorage.instance.ref(ref).delete();
   }
 
@@ -86,7 +86,7 @@ class FirebaseStorageApis {
   Future<void> addService(ServiceModel service) async {
     CollectionReference automotiveReference =
         firestorInstance.collection("services");
-    automotiveReference.add({'name': service.name, 'url': service.downloadurl});
+    automotiveReference.add({'name': service.name, 'url': service.downloadurl, 'image_name':service.imageName});
   }
 
   Future<void> addSelling(SellingModel selling) async {
@@ -96,7 +96,8 @@ class FirebaseStorageApis {
       'name': selling.name,
       'price': selling.price,
       'rate': selling.rate,
-      'url': selling.url
+      'url': selling.url,
+      'image_name':selling.imageName
     });
   }
 
@@ -106,7 +107,8 @@ class FirebaseStorageApis {
     automotiveReference.add({
       'name': rentalcar.name,
       'seats': rentalcar.seats,
-      'url': rentalcar.url
+      'url': rentalcar.url,
+      'image_name':rentalcar.imageName
     });
   }
 

@@ -103,10 +103,10 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                const Row(
+                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  children: [
+                                  children: const [
                                     Text(
                                       "Car Brakes",
                                       style: TextStyle(
