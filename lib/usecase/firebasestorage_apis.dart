@@ -83,6 +83,14 @@ class FirebaseStorageApis {
     return firestorInstance.collection("selling").snapshots();
   }
 
+    Stream<QuerySnapshot> fetchAllServices() {
+    return firestorInstance.collection("services").snapshots();
+  }
+
+    Stream<QuerySnapshot> fetchAllRentalCars() {
+    return firestorInstance.collection("renting").snapshots();
+  }
+
   Future<void> addService(ServiceModel service) async {
     CollectionReference automotiveReference =
         firestorInstance.collection("services");

@@ -2,6 +2,7 @@ import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/firebase/storage_service.dart';
 import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,14 +14,6 @@ class ServiceManagerPage extends StatefulWidget {
 }
 
 class _ServiceManagerPageState extends State<ServiceManagerPage> {
-  late Future<List<FirebaseFile>> servicesFromFirebaseStorage;
-
-  @override
-  void initState() {
-    super.initState();
-    servicesFromFirebaseStorage =
-        FirebaseStorageApis.fetchAllrentalServicesImages();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +35,8 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
           ],
         ),
         drawer: const CustomDrawer(),
-        body: FutureBuilder<List<FirebaseFile>>(
-          future: servicesFromFirebaseStorage,
+        body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseStorageApis().fetchAllServices(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -54,12 +47,12 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
             }
 
             if (snapshot.hasData) {
-              final files=snapshot.data;
+              final services=snapshot.data!.docs;
               return ListView(
                 children: List.generate(
-                    files!.length,
+                    services.length,
                     (index){
-                      final file=files[index];
+                      final service=services[index];
                       return Card(
                           margin: const EdgeInsets.all(10),
                           color: Colors.grey,
@@ -79,7 +72,7 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
                                           color: Colors.amber,
                                           image: DecorationImage(
                                               image: NetworkImage(
-                                                  file.url),
+                                                  service['url']),
                                               fit: BoxFit.cover)),
                                     ),
                                     Row(
@@ -91,7 +84,20 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
                                               color: Colors.green,
                                             )),
                                         IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                               FirebaseStorageApis()
+                                              .deleteImagefromFirebaseStorage(
+                                                  service['image_name'])
+                                              .then((value) =>
+                                                  FirebaseStorageApis()
+                                                      .deleteSellingDocument(
+                                                          service.id))
+                                              .then((value) => ScaffoldMessenger
+                                                      .of(context)
+                                                  .showSnackBar(const SnackBar(
+                                                      content: Text(
+                                                          "Deleted successfully"))));
+                                            },
                                             icon: const Icon(
                                               Icons.delete,
                                               color: Colors.red,
@@ -106,10 +112,10 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
                                  Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  children: const [
+                                  children:  [
                                     Text(
-                                      "Car Brakes",
-                                      style: TextStyle(
+                                      service['name'],
+                                      style:const  TextStyle(
                                           color: black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500),
