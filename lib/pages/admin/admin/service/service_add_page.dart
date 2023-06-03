@@ -125,6 +125,33 @@ class _AddServiceState extends State<AddService> {
             ),
             const SizedBox(height: 10,),
             buildProgress(),
+               const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      selectFile();
+                    },
+                    child: const Text(
+                      "Select File",
+                      style: TextStyle(color: white, fontSize: 18),
+                    )),
+                const SizedBox(
+                  width: 40,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      uploadFile();
+                    },
+                    child: const Text(
+                      "Upload File",
+                      style: TextStyle(color: white, fontSize: 18),
+                    )),
+              ],
+            ),
             const SizedBox(
               height: 20,
             ),
