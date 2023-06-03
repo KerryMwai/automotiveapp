@@ -35,7 +35,7 @@ class _AddSellingPartState extends State<AddSellingPart> {
   }
 
   Future uploadFile() async {
-    final path = 'renting/${pickedFile!.name}';
+    final path = 'selling/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
     final filename = pickedFile!.name;
 
