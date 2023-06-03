@@ -3,6 +3,7 @@ import 'package:automotiveapp/firebase/storage_service.dart';
 import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SellManagerPage extends StatefulWidget {
   const SellManagerPage({super.key});
@@ -29,7 +30,9 @@ class _SellManagerPageState extends State<SellManagerPage> {
             Container(
                 margin: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go("/add_selling");
+                    },
                     child: const Text(
                       "Add product",
                       style: TextStyle(fontSize: 18),
@@ -69,7 +72,7 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                   height: 65,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Colors.amber,
+                                      // color: Colors.amber,
                                       image: DecorationImage(
                                           image: NetworkImage(file.url),
                                           fit: BoxFit.cover)),

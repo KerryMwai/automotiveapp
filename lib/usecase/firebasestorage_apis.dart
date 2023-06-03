@@ -1,13 +1,16 @@
 import 'dart:io';
 
 import 'package:automotiveapp/firebase/storage_service.dart';
+import 'package:automotiveapp/models/service_model.dart';
 import 'package:automotiveapp/respository/automotive_repository.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseStorageApis {
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
+  FirebaseFirestore firestorInstance=FirebaseFirestore.instance;
 
   // Fetching the urls to be displayed in the app
   static Future<List<FirebaseFile>> fetchAllrentalCarsImages() async {
@@ -72,5 +75,15 @@ class FirebaseStorageApis {
 // Handling deletion
   static Future<void> delete(String ref) async {
     await FirebaseStorage.instance.ref(ref).delete();
+  }
+
+
+  // Firebasefirestore operations
+  Future<void> addService(ServiceModel service)async{
+    CollectionReference automotiveReference=firestorInstance.collection("services");
+    automotiveReference.add({
+      'name':service.name,
+      'url':service.downloadurl
+    });
   }
 }
