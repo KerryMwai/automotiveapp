@@ -1,15 +1,13 @@
-
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField2 extends StatelessWidget {
-  const CustomTextField2({
-    super.key,
-    required this.size,
-    required this.inputController,
-    required this.obsecureText,
-    required this.labeltext
-  });
+  const CustomTextField2(
+      {super.key,
+      required this.size,
+      required this.inputController,
+      required this.obsecureText,
+      required this.labeltext});
 
   final Size size;
   final TextEditingController inputController;
@@ -22,18 +20,21 @@ class CustomTextField2 extends StatelessWidget {
       // padding: const EdgeInsets.symmetric(horizontal: 15),
       width: size.width,
       decoration: BoxDecoration(
-          border: BorderDirectional(
-              bottom: BorderSide(
-                  width: 1, color: white.withOpacity(0.4)))),
+        border: BorderDirectional(
+          bottom: BorderSide(
+            width: 1,
+            color: brown.withOpacity(0.4),
+          ),
+        ),
+      ),
       child: TextField(
         keyboardType: TextInputType.emailAddress,
         controller: inputController,
-        cursorColor: white,
+        cursorColor: brown,
         style: TextStyle(
           color: white.withOpacity(0.4),
           fontSize: 18,
           letterSpacing: 1.2,
-          
         ),
         obscureText: obsecureText,
         decoration: InputDecoration(
@@ -41,7 +42,7 @@ class CustomTextField2 extends StatelessWidget {
             label: Text(
               labeltext,
               style: TextStyle(
-                  color: white.withOpacity(0.4),
+                  color: brown.withOpacity(0.4),
                   fontSize: 18,
                   letterSpacing: 1.2),
             )),

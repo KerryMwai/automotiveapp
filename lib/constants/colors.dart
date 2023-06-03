@@ -6,6 +6,7 @@ const pink=Color.fromARGB(241, 207, 27, 162);
 const white=Colors.white;
 const orange=Colors.orange;
 const blue=Colors.blue;
+const brown=Colors.brown;
 const transparent=Colors.transparent;
 const btncolor1=Color.fromARGB(255, 233, 27, 223);
 const btncolor2=Color.fromARGB(255, 228, 13, 228);

@@ -3,6 +3,7 @@ import 'package:automotiveapp/firebase/storage_service.dart';
 import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RentManagerPage extends StatefulWidget {
   const RentManagerPage({super.key});
@@ -31,7 +32,9 @@ class _RentManagerPageState extends State<RentManagerPage> {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
-            child: ElevatedButton(onPressed: (){}, child: const Text("Add car", style: TextStyle(fontSize: 18),)))
+            child: ElevatedButton(onPressed: (){
+              context.go("/add_car");
+            }, child: const Text("Add car", style: TextStyle(fontSize: 18),)))
         ],
       ),
       drawer: const CustomDrawer(),
