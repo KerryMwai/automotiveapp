@@ -12,7 +12,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 class FirebaseStorageApis {
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
-  FirebaseFirestore firestorInstance=FirebaseFirestore.instance;
+  FirebaseFirestore firestorInstance = FirebaseFirestore.instance;
 
   // Fetching the urls to be displayed in the app
   static Future<List<FirebaseFile>> fetchAllrentalCarsImages() async {
@@ -73,43 +73,68 @@ class FirebaseStorageApis {
     uploadTask = null;
   }
 
-
 // Handling deletion
   static Future<void> delete(String ref) async {
     await FirebaseStorage.instance.ref(ref).delete();
   }
 
-
   // Firebasefirestore operations
-  Stream<QuerySnapshot> fetchAllSellItems(){
-      return firestorInstance.collection("selling").snapshots();
+  Stream<QuerySnapshot> fetchAllSellItems() {
+    return firestorInstance.collection("selling").snapshots();
   }
 
+  Future<void> addService(ServiceModel service) async {
+    CollectionReference automotiveReference =
+        firestorInstance.collection("services");
+    automotiveReference.add({'name': service.name, 'url': service.downloadurl});
+  }
 
-  Future<void> addService(ServiceModel service)async{
-    CollectionReference automotiveReference=firestorInstance.collection("services");
+  Future<void> addSelling(SellingModel selling) async {
+    CollectionReference automotiveReference =
+        firestorInstance.collection("selling");
     automotiveReference.add({
-      'name':service.name,
-      'url':service.downloadurl
+      'name': selling.name,
+      'price': selling.price,
+      'rate': selling.rate,
+      'url': selling.url
     });
   }
 
-    Future<void> addSelling(SellingModel selling)async{
-    CollectionReference automotiveReference=firestorInstance.collection("selling");
+  Future<void> addRentalCar(RentalModel rentalcar) async {
+    CollectionReference automotiveReference =
+        firestorInstance.collection("renting");
     automotiveReference.add({
-      'name':selling.name,
-      'price':selling.price,
-      'rate':selling.rate,
-      'url':selling.url
+      'name': rentalcar.name,
+      'seats': rentalcar.seats,
+      'url': rentalcar.url
     });
   }
 
-    Future<void> addRentalCar(RentalModel rentalcar)async{
-    CollectionReference automotiveReference=firestorInstance.collection("renting");
-    automotiveReference.add({
-      'name':rentalcar.name,
-      'seats':rentalcar.seats,
-      'url':rentalcar.url
-    });
+  // Handle deletion
+  Future<void> deleteSellingDocument(String id) async {
+    CollectionReference selldoc = firestorInstance.collection("selling");
+    selldoc
+        .doc(id)
+        .delete()
+        .then((value) => print("Sell doc Deleted"))
+        .catchError((error) => print("Failed to delete sell doc: $error"));
+  }
+
+  Future<void> deleteServiceDocument(String id) async {
+    CollectionReference servicedoc = firestorInstance.collection("services");
+    servicedoc
+        .doc(id)
+        .delete()
+        .then((value) => print("Sell doc Deleted"))
+        .catchError((error) => print("Failed to delete sell doc: $error"));
+  }
+
+  Future<void> deleteRentingDocument(String id) async {
+    CollectionReference rentingdoc = firestorInstance.collection("renting");
+    rentingdoc
+        .doc(id)
+        .delete()
+        .then((value) => print("Renting doc Deleted"))
+        .catchError((error) => print("Failed to delete renting doc: $error"));
   }
 }
