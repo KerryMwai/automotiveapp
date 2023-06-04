@@ -37,7 +37,7 @@ class _AddServiceState extends State<AddService> {
   Future uploadFile() async {
     final path = 'services/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
-    final filename = pickedFile!.name;
+    filename = pickedFile!.name;
 
     final ref = FirebaseStorage.instance.ref().child(path);
     setState(() {

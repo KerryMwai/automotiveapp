@@ -67,7 +67,7 @@ class _RentManagerPageState extends State<RentManagerPage> {
                                 IconButton(onPressed: (){
                                    FirebaseStorageApis()
                                               .deleteImagefromFirebaseStorage(
-                                                  car['image_name'])
+                                                  "renting/${car['image_name']}")
                                               .then((value) =>
                                                   FirebaseStorageApis()
                                                       .deleteSellingDocument(

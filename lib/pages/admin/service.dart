@@ -1,5 +1,4 @@
 import 'package:automotiveapp/constants/colors.dart';
-import 'package:automotiveapp/firebase/storage_service.dart';
 import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -87,7 +86,7 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
                                             onPressed: () {
                                                FirebaseStorageApis()
                                               .deleteImagefromFirebaseStorage(
-                                                  service['image_name'])
+                                                  "services/${service['image_name']}")
                                               .then((value) =>
                                                   FirebaseStorageApis()
                                                       .deleteSellingDocument(

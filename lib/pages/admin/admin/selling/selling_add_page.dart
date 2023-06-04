@@ -37,7 +37,7 @@ class _AddSellingPartState extends State<AddSellingPart> {
   Future uploadFile() async {
     final path = 'selling/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
-    final filename = pickedFile!.name;
+    filename = pickedFile!.name;
 
     final ref = FirebaseStorage.instance.ref().child(path);
     setState(() {
@@ -200,9 +200,9 @@ class _AddSellingPartState extends State<AddSellingPart> {
                                     content: Text("Car added successfully")))
                           });
                 },
-                child: Row(
+                child:const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children:  [
                     Text("Add Product"),
                     SizedBox(
                       width: 10,

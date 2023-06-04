@@ -39,7 +39,7 @@ class _AddRentalCarState extends State<AddRentalCar> {
   Future uploadFile() async {
     final path = 'renting/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
-    final filename = pickedFile!.name;
+    filename = pickedFile!.name;
 
     final ref = FirebaseStorage.instance.ref().child(path);
     setState(() {

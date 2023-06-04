@@ -90,7 +90,7 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                         onPressed: () {
                                           FirebaseStorageApis()
                                               .deleteImagefromFirebaseStorage(
-                                                  singledoc['image_name'])
+                                                  "selling/${singledoc['image_name']}")
                                               .then((value) =>
                                                   FirebaseStorageApis()
                                                       .deleteSellingDocument(
