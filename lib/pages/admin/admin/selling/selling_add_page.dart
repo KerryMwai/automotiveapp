@@ -47,9 +47,9 @@ class _AddSellingPartState extends State<AddSellingPart> {
     final snapshot = await uploadTask!.whenComplete(() {});
     urlDownload = await snapshot.ref.getDownloadURL();
 
-    print("Download link: $urlDownload");
-    print("______________________________________");
-    print("File name is: $filename");
+    // print("Download link: $urlDownload");
+    // print("______________________________________");
+    // print("File name is: $filename");
     uploadTask = null;
   }
 
@@ -106,7 +106,7 @@ class _AddSellingPartState extends State<AddSellingPart> {
           children: [
             SizedBox(
               width: size.width,
-              height: size.width * 0.3,
+              height: size.width * 0.4,
               child: pickedFile == null
                   ? const Text("Please pick a file")
                   : Expanded(
@@ -176,7 +176,7 @@ class _AddSellingPartState extends State<AddSellingPart> {
                 size: size,
                 inputController: priceController,
                 obsecureText: false,
-                labeltext: "Rental price"),
+                labeltext: "Price"),
             const SizedBox(
               height: 30,
             ),
@@ -187,8 +187,8 @@ class _AddSellingPartState extends State<AddSellingPart> {
                           name: nameController.text,
                           price: double.parse(priceController.text),
                           rate: double.parse(rateController.text),
-                          url: urlDownload,
-                          imageName: filename))
+                          url: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80",
+                          imageName: "service-demo.jpg"))
                       .then((value) {
                     nameController.clear();
                     priceController.clear();
@@ -200,10 +200,10 @@ class _AddSellingPartState extends State<AddSellingPart> {
                                     content: Text("Car added successfully")))
                           });
                 },
-                child:const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:  [
-                    Text("Add Product"),
+                  children:const  [
+                     Text("Add Product"),
                     SizedBox(
                       width: 10,
                     ),

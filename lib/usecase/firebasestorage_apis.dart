@@ -115,6 +115,7 @@ class FirebaseStorageApis {
     automotiveReference.add({
       'name': rentalcar.name,
       'seats': rentalcar.seats,
+      'price':rentalcar.price,
       'url': rentalcar.url,
       'image_name':rentalcar.imageName
     });

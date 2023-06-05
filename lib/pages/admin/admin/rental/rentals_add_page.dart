@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/models/rental_model.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
-import 'package:automotiveapp/widgets/custom_button.dart';
 import 'package:automotiveapp/widgets/text_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -182,15 +181,34 @@ class _AddRentalCarState extends State<AddRentalCar> {
             const SizedBox(
               height: 30,
             ),
-            CustomButton(
-                titleText: "Add Car",
+             ElevatedButton(
                 onPressed: () {
-                  FirebaseStorageApis().addRentalCar(RentalModel(
+                 FirebaseStorageApis().addRentalCar(RentalModel(
                       name: nameController.text,
                       seats: int.parse(seatsController.text),
-                      url: urlDownload,
-                      imageName: filename));
-                })
+                      price: double.parse(priceController.text),
+                      url: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+                      imageName: "ferrari-demo.jpg"))
+                      .then((value) {
+                    nameController.clear();
+                    seatsController.clear();
+                    urlDownload = '';
+                  }).then((value) => {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text("Car added successfully")))
+                          });
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:  const[
+                    Text("Add Product"),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(Icons.add)
+                  ],
+                ))
           ],
         ),
       ),

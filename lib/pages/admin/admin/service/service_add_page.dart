@@ -164,7 +164,7 @@ class _AddServiceState extends State<AddService> {
               height: 30,
             ),
             CustomButton(titleText: "Add Service", onPressed: () {
-              FirebaseStorageApis().addService(ServiceModel(name: nameController.text, downloadurl: urlDownload, imageName: filename));
+              FirebaseStorageApis().addService(ServiceModel(name: nameController.text, downloadurl: "https://plus.unsplash.com/premium_photo-1661411119301-8cae0adce9a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGF1dG8lMjBzZXJ2aWNlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60", imageName: "service-demo.jpg"));
             })
           ],
         ),

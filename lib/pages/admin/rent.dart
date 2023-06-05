@@ -70,7 +70,7 @@ class _RentManagerPageState extends State<RentManagerPage> {
                                                   "renting/${car['image_name']}")
                                               .then((value) =>
                                                   FirebaseStorageApis()
-                                                      .deleteSellingDocument(
+                                                      .deleteRentingDocument(
                                                           car.id))
                                               .then((value) => ScaffoldMessenger
                                                       .of(context)
@@ -91,7 +91,7 @@ class _RentManagerPageState extends State<RentManagerPage> {
                               children:  [
                                 const Icon(Icons.airline_seat_recline_extra),
                                 const SizedBox(width: 10,),
-                                Text(car['seats'], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)
+                                Text("${car['seats']} seats", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)
                               ],
                             )
                           ],
