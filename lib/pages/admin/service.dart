@@ -85,12 +85,8 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
                                         IconButton(
                                             onPressed: () {
                                                FirebaseStorageApis()
-                                              .deleteImagefromFirebaseStorage(
-                                                  "services/${service['image_name']}")
-                                              .then((value) =>
-                                                  FirebaseStorageApis()
                                                       .deleteSellingDocument(
-                                                          service.id))
+                                                          service.id)
                                               .then((value) => ScaffoldMessenger
                                                       .of(context)
                                                   .showSnackBar(const SnackBar(

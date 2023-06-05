@@ -121,6 +121,23 @@ class FirebaseStorageApis {
     });
   }
 
+  // Handling updates in the app
+  Future<void> updateCar(String id, RentalModel car) {
+     CollectionReference automotiveReference =
+        firestorInstance.collection("renting");
+  return automotiveReference
+    .doc(id)
+    .update({
+      'name': car.name,
+      'seats': car.seats,
+      'price':car.price,
+      'url': car.url,
+      'image_name':car.imageName
+
+    });
+
+}
+
   // Handle deletion
   Future<void> deleteSellingDocument(String id) async {
     CollectionReference selldoc = firestorInstance.collection("selling");

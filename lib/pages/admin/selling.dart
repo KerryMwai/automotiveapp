@@ -89,12 +89,8 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                     IconButton(
                                         onPressed: () {
                                           FirebaseStorageApis()
-                                              .deleteImagefromFirebaseStorage(
-                                                  "selling/${singledoc['image_name']}")
-                                              .then((value) =>
-                                                  FirebaseStorageApis()
-                                                      .deleteSellingDocument(
-                                                          singledoc.id))
+                                              .deleteSellingDocument(
+                                                  singledoc.id)
                                               .then((value) => ScaffoldMessenger
                                                       .of(context)
                                                   .showSnackBar(const SnackBar(
