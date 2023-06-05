@@ -76,7 +76,7 @@ class _SellingPageState extends State<SellingPage> {
                               width: 4,
                             ),
                             Text(
-                              "${sellItem['rates']}",
+                              "${sellItem['rate']}",
                               style: TextStyle(
                                   color: white.withOpacity(0.6), fontSize: 18),
                             )

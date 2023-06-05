@@ -104,55 +104,56 @@ class _AddSellingPartState extends State<AddSellingPart> {
         margin: const EdgeInsets.all(15),
         child: ListView(
           children: [
-            SizedBox(
-              width: size.width,
-              height: size.width * 0.4,
-              child: pickedFile == null
-                  ? const Text("Please pick a file")
-                  : Expanded(
-                      child: Container(
-                      color: blue[100],
-                      child: Center(
-                        // child: Text(pickedFile!.name),
-                        child: Image.file(
-                          File(pickedFile!.path!),
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    )),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            buildProgress(),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      selectFile();
-                    },
-                    child: const Text(
-                      "Select File",
-                      style: TextStyle(color: white, fontSize: 18),
-                    )),
-                const SizedBox(
-                  width: 40,
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      uploadFile();
-                    },
-                    child: const Text(
-                      "Upload File",
-                      style: TextStyle(color: white, fontSize: 18),
-                    )),
-              ],
-            ),
+            const SizedBox(height: 50,),
+            // SizedBox(
+            //   width: size.width,
+            //   height: size.width * 0.4,
+            //   child: pickedFile == null
+            //       ? const Text("Please pick a file")
+            //       : Expanded(
+            //           child: Container(
+            //           color: blue[100],
+            //           child: Center(
+            //             // child: Text(pickedFile!.name),
+            //             child: Image.file(
+            //               File(pickedFile!.path!),
+            //               width: double.infinity,
+            //               fit: BoxFit.cover,
+            //             ),
+            //           ),
+            //         )),
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            // buildProgress(),
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     ElevatedButton(
+            //         onPressed: () {
+            //           selectFile();
+            //         },
+            //         child: const Text(
+            //           "Select File",
+            //           style: TextStyle(color: white, fontSize: 18),
+            //         )),
+            //     const SizedBox(
+            //       width: 40,
+            //     ),
+            //     ElevatedButton(
+            //         onPressed: () {
+            //           uploadFile();
+            //         },
+            //         child: const Text(
+            //           "Upload File",
+            //           style: TextStyle(color: white, fontSize: 18),
+            //         )),
+            //   ],
+            // ),
             const SizedBox(
               height: 20,
             ),
@@ -200,9 +201,9 @@ class _AddSellingPartState extends State<AddSellingPart> {
                                     content: Text("Car added successfully")))
                           });
                 },
-                child: Row(
+                child:const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:const  [
+                  children:  [
                      Text("Add Product"),
                     SizedBox(
                       width: 10,
