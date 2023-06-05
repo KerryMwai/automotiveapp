@@ -1,21 +1,25 @@
 import 'package:automotiveapp/constants/colors.dart';
-import 'package:automotiveapp/widgets/custom_button.dart';
+import 'package:automotiveapp/models/service_model.dart';
+import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:automotiveapp/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class UpdateService extends StatefulWidget {
-  const UpdateService({super.key});
-
+  const UpdateService({super.key, required this.id, required this.name});
+ final String id;
+  final String name;
   @override
   State<UpdateService> createState() => _UpdateServiceState();
 }
 
 class _UpdateServiceState extends State<UpdateService> {
   TextEditingController nameController=TextEditingController();
+ 
   @override
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
+    nameController.text=widget.name;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: (){
@@ -36,7 +40,15 @@ class _UpdateServiceState extends State<UpdateService> {
             const SizedBox(height: 20,),
             CustomTextField2(size: size, inputController: nameController, obsecureText: false, labeltext: "Service name"),
             const SizedBox(height: 30,),
-            CustomButton(titleText: "Update Service", onPressed: (){})
+            ElevatedButton(onPressed: (){
+              FirebaseStorageApis().updateService(widget.id, ServiceModel(name: nameController.text, downloadurl: "https://cdn.pixabay.com/photo/2015/10/19/20/01/petrol-996617_1280.jpg", imageName: "service-demo.jpg"));
+            }, child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Update service"),
+                SizedBox(width: 10,),
+                Icon(Icons.edit)
+            ],))
           ],
         ),
       ),

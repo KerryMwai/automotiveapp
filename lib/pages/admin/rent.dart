@@ -1,4 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
+import 'package:automotiveapp/pages/admin/admin/rental/rental_update_page.dart';
 import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -73,7 +74,18 @@ class _RentManagerPageState extends State<RentManagerPage> {
                                 Row(
                                   children: [
                                     IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      UpdateRentalCar(
+                                                          id: car.id,
+                                                          name: car['name'],
+                                                          seats: car['seats'],
+                                                          price:
+                                                              car['price'])));
+                                        },
                                         icon: const Icon(
                                           Icons.edit,
                                           color: Colors.green,

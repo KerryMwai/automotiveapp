@@ -1,5 +1,6 @@
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/firebase/storage_service.dart';
+import 'package:automotiveapp/pages/admin/admin/selling/selling_update_page.dart';
 import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -81,7 +82,9 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                 Row(
                                   children: [
                                     IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder:(context)=>UpdateSellingPart(id: singledoc.id, name: singledoc['name'], price: singledoc['price'], rate: singledoc['rate']) ));
+                                        },
                                         icon: const Icon(
                                           Icons.edit,
                                           color: Colors.green,

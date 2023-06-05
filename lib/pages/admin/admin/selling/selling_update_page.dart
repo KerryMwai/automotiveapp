@@ -1,12 +1,16 @@
 import 'package:automotiveapp/constants/colors.dart';
-import 'package:automotiveapp/widgets/custom_button.dart';
+import 'package:automotiveapp/models/selling_model.dart';
+import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:automotiveapp/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class UpdateSellingPart extends StatefulWidget {
-  const UpdateSellingPart({super.key});
-
+  const UpdateSellingPart({super.key, required this.id, required this.name, required this.price, required this.rate});
+  final String id;
+  final String name;
+  final double price;
+  final double rate;
   @override
   State<UpdateSellingPart> createState() => _UpdateSellingPartState();
 }
@@ -18,6 +22,9 @@ class _UpdateSellingPartState extends State<UpdateSellingPart> {
   @override
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
+    nameController.text=widget.name;
+    rateController.text=widget.rate.toString();
+    priceController.text=widget.price.toString();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: (){
@@ -43,7 +50,16 @@ class _UpdateSellingPartState extends State<UpdateSellingPart> {
             const SizedBox(height: 20,),
             CustomTextField2(size: size, inputController: priceController, obsecureText: false, labeltext: "Rental price"),
             const SizedBox(height: 30,),
-            CustomButton(titleText: "Update Product", onPressed: (){})
+           ElevatedButton(onPressed: (){
+            FirebaseStorageApis().updateProduct(widget.id, SellingModel(name: widget.name, price: double.parse(priceController.text), rate:double.parse(rateController.text), url:"https://cdn.pixabay.com/photo/2017/09/22/00/11/spare-parts-2774041_640.jpg" , imageName: "product-demo.png"));
+           }, child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Update Sell"),
+              SizedBox(width: 10,),
+              Icon(Icons.edit)
+            ],
+           ))
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
+import 'package:automotiveapp/pages/admin/admin/service/service_update_page.dart';
 import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -77,7 +78,9 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
                                     Row(
                                       children: [
                                         IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateService(id: service.id, name: service['name'])));
+                                            },
                                             icon: const Icon(
                                               Icons.edit,
                                               color: Colors.green,

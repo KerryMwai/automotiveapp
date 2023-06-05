@@ -74,7 +74,7 @@ class FirebaseStorageApis {
   }
 
 // Handling deletion
-   Future<void> deleteImagefromFirebaseStorage(String ref) async {
+  Future<void> deleteImagefromFirebaseStorage(String ref) async {
     await FirebaseStorage.instance.ref(ref).delete();
   }
 
@@ -83,18 +83,22 @@ class FirebaseStorageApis {
     return firestorInstance.collection("selling").snapshots();
   }
 
-    Stream<QuerySnapshot> fetchAllServices() {
+  Stream<QuerySnapshot> fetchAllServices() {
     return firestorInstance.collection("services").snapshots();
   }
 
-    Stream<QuerySnapshot> fetchAllRentalCars() {
+  Stream<QuerySnapshot> fetchAllRentalCars() {
     return firestorInstance.collection("renting").snapshots();
   }
 
   Future<void> addService(ServiceModel service) async {
     CollectionReference automotiveReference =
         firestorInstance.collection("services");
-    automotiveReference.add({'name': service.name, 'url': service.downloadurl, 'image_name':service.imageName});
+    automotiveReference.add({
+      'name': service.name,
+      'url': service.downloadurl,
+      'image_name': service.imageName
+    });
   }
 
   Future<void> addSelling(SellingModel selling) async {
@@ -105,7 +109,7 @@ class FirebaseStorageApis {
       'price': selling.price,
       'rate': selling.rate,
       'url': selling.url,
-      'image_name':selling.imageName
+      'image_name': selling.imageName
     });
   }
 
@@ -115,28 +119,46 @@ class FirebaseStorageApis {
     automotiveReference.add({
       'name': rentalcar.name,
       'seats': rentalcar.seats,
-      'price':rentalcar.price,
+      'price': rentalcar.price,
       'url': rentalcar.url,
-      'image_name':rentalcar.imageName
+      'image_name': rentalcar.imageName
     });
   }
 
   // Handling updates in the app
   Future<void> updateCar(String id, RentalModel car) {
-     CollectionReference automotiveReference =
+    CollectionReference automotiveReference =
         firestorInstance.collection("renting");
-  return automotiveReference
-    .doc(id)
-    .update({
+    return automotiveReference.doc(id).update({
       'name': car.name,
       'seats': car.seats,
-      'price':car.price,
+      'price': car.price,
       'url': car.url,
-      'image_name':car.imageName
-
+      'image_name': car.imageName
     });
+  }
 
-}
+  Future<void> updateProduct(String id, SellingModel product) {
+    CollectionReference automotiveReference =
+        firestorInstance.collection("selling");
+    return automotiveReference.doc(id).update({
+      'name': product.name,
+      'price': product.price,
+      'rate': product.rate,
+      'url': product.url,
+      'image_name': product.imageName
+    });
+  }
+
+  Future<void> updateService(String id, ServiceModel service) {
+    CollectionReference automotiveReference =
+        firestorInstance.collection("services");
+    return automotiveReference.doc(id).update({
+       'name': service.name,
+      'url': service.downloadurl,
+      'image_name': service.imageName
+    });
+  }
 
   // Handle deletion
   Future<void> deleteSellingDocument(String id) async {
