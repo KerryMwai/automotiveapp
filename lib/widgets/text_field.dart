@@ -23,16 +23,16 @@ class CustomTextField2 extends StatelessWidget {
         border: BorderDirectional(
           bottom: BorderSide(
             width: 1,
-            color: brown.withOpacity(0.4),
+            color: white.withOpacity(0.4),
           ),
         ),
       ),
       child: TextField(
         keyboardType: TextInputType.emailAddress,
         controller: inputController,
-        cursorColor: brown,
+        cursorColor: white.withOpacity(0.8),
         style: TextStyle(
-          color: brown.withOpacity(0.4),
+          color: white.withOpacity(0.6),
           fontSize: 18,
           letterSpacing: 1.2,
         ),
@@ -42,7 +42,7 @@ class CustomTextField2 extends StatelessWidget {
             label: Text(
               labeltext,
               style: TextStyle(
-                  color: brown.withOpacity(0.4),
+                  color: white.withOpacity(0.8),
                   fontSize: 18,
                   letterSpacing: 1.2),
             )),

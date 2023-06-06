@@ -1,5 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
-import 'package:automotiveapp/pages/admin/admin/service/service_update_page.dart';
+import 'package:automotiveapp/models/service_model.dart';
 import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,10 +14,11 @@ class ServiceManagerPage extends StatefulWidget {
 }
 
 class _ServiceManagerPageState extends State<ServiceManagerPage> {
-
+  TextEditingController nameController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: black,
         appBar: AppBar(
           backgroundColor: blackfade,
           title: const Text("Service Manager"),
@@ -79,7 +80,87 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
                                       children: [
                                         IconButton(
                                             onPressed: () {
-                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateService(id: service.id, name: service['name'])));
+                                           showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                final String name =
+                                                    service['name'];
+                                                
+                                                nameController.text = name;
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      "Update Service"),
+                                                  content:
+                                                      SingleChildScrollView(
+                                                    child: Column(
+                                                      children: [
+                                                        const Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  18.0),
+                                                          child: TextField(
+                                                            controller: null,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(18.0),
+                                                          child: TextField(
+                                                            controller:
+                                                                nameController,
+                                                            decoration:
+                                                                const InputDecoration(
+                                                                    hintText:
+                                                                        "Name"),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  actions: [
+                                                    ElevatedButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: const Text(
+                                                            "Cancel")),
+                                                    ElevatedButton(
+                                                        onPressed: () {
+                                                          FirebaseStorageApis()
+                                                              .updateService(
+                                                                  service.id,
+                                                                  ServiceModel(
+                                                                      name: nameController
+                                                                          .text,
+                                                                    
+                                                                      downloadurl:
+                                                                          "https://media.istockphoto.com/id/1347150429/photo/professional-mechanic-working-on-the-engine-of-the-car-in-the-garage.jpg?s=1024x1024&w=is&k=20&c=yFM-ZakZSgmuMl3bOng86UWO1bfQFCPeQS06myTNkQI=",
+                                                                      imageName:
+                                                                          "service-demo.jpg"))
+                                                              .then((value) => {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(const SnackBar(
+                                                                            content:
+                                                                                Text("Service updated successfully")))
+                                                                  })
+                                                              .then((value) =>
+                                                                  Navigator.pop(
+                                                                      context));
+                                                        },
+                                                        child: const Text(
+                                                            "Update")),
+                                                  ],
+                                                );
+                                              });
                                             },
                                             icon: const Icon(
                                               Icons.edit,

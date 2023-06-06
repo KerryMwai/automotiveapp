@@ -91,6 +91,7 @@ class _AddRentalCarState extends State<AddRentalCar> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: black,
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
@@ -105,57 +106,57 @@ class _AddRentalCarState extends State<AddRentalCar> {
         margin: const EdgeInsets.all(15),
         child: ListView(
           children: [
-           SizedBox(
-              width: size.width,
-              height: size.width * 0.3,
-              child: pickedFile == null
-                  ? const Text("Please pick a file")
-                  : Expanded(
-                      child: Container(
-                      color: blue[100],
-                      child: Center(
-                        // child: Text(pickedFile!.name),
-                        child: Image.file(
-                          File(pickedFile!.path!),
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    )),
-            ),
+          //  SizedBox(
+          //     width: size.width,
+          //     height: size.width * 0.3,
+          //     child: pickedFile == null
+          //         ? const Text("Please pick a file")
+          //         : Expanded(
+          //             child: Container(
+          //             color: blue[100],
+          //             child: Center(
+          //               // child: Text(pickedFile!.name),
+          //               child: Image.file(
+          //                 File(pickedFile!.path!),
+          //                 width: double.infinity,
+          //                 fit: BoxFit.cover,
+          //               ),
+          //             ),
+          //           )),
+          //   ),
+          //   const SizedBox(
+          //     height: 10,
+          //   ),
+          //   buildProgress(),
+          //      const SizedBox(
+          //     height: 10,
+          //   ),
+          //   Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       ElevatedButton(
+          //           onPressed: () {
+          //             selectFile();
+          //           },
+          //           child: const Text(
+          //             "Select File",
+          //             style: TextStyle(color: white, fontSize: 18),
+          //           )),
+          //       const SizedBox(
+          //         width: 40,
+          //       ),
+          //       ElevatedButton(
+          //           onPressed: () {
+          //             uploadFile();
+          //           },
+          //           child: const Text(
+          //             "Upload File",
+          //             style: TextStyle(color: white, fontSize: 18),
+          //           )),
+          //     ],
+          //   ),
             const SizedBox(
-              height: 10,
-            ),
-            buildProgress(),
-               const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      selectFile();
-                    },
-                    child: const Text(
-                      "Select File",
-                      style: TextStyle(color: white, fontSize: 18),
-                    )),
-                const SizedBox(
-                  width: 40,
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      uploadFile();
-                    },
-                    child: const Text(
-                      "Upload File",
-                      style: TextStyle(color: white, fontSize: 18),
-                    )),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
+              height: 50,
             ),
             CustomTextField2(
                 size: size,

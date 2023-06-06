@@ -89,6 +89,7 @@ class _AddServiceState extends State<AddService> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: black,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -104,28 +105,28 @@ class _AddServiceState extends State<AddService> {
         margin: const EdgeInsets.all(15),
         child: ListView(
           children: [
-            SizedBox(
-              width: size.width,
-              height: size.width * 0.3,
-              child: pickedFile == null
-                  ? const Text("Please pick a file")
-                  : Expanded(
-                      child: Container(
-                      color: blue[100],
-                      child: Center(
-                        // child: Text(pickedFile!.name),
-                        child: Image.file(
-                          File(pickedFile!.path!),
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    )),
-            ),
-            const SizedBox(height: 10,),
-            buildProgress(),
+            // SizedBox(
+            //   width: size.width,
+            //   height: size.width * 0.3,
+            //   child: pickedFile == null
+            //       ? const Text("Please pick a file")
+            //       : Expanded(
+            //           child: Container(
+            //           color: blue[100],
+            //           child: Center(
+            //             // child: Text(pickedFile!.name),
+            //             child: Image.file(
+            //               File(pickedFile!.path!),
+            //               width: double.infinity,
+            //               fit: BoxFit.cover,
+            //             ),
+            //           ),
+            //         )),
+            // ),
+            // const SizedBox(height: 10,),
+            // buildProgress(),
                const SizedBox(
-              height: 10,
+              height: 50,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

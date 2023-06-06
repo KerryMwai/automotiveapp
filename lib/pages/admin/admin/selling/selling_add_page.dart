@@ -90,6 +90,7 @@ class _AddSellingPartState extends State<AddSellingPart> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+        backgroundColor: black,
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
