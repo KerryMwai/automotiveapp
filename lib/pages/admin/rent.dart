@@ -97,14 +97,7 @@ class _RentManagerPageState extends State<RentManagerPage> {
                                                       SingleChildScrollView(
                                                     child: Column(
                                                       children: [
-                                                        const Padding(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  18.0),
-                                                          child: TextField(
-                                                            controller: null,
-                                                          ),
-                                                        ),
+                                                        const SizedBox(height: 20,),
                                                         const SizedBox(
                                                           height: 10,
                                                         ),

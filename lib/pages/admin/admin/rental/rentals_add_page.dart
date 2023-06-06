@@ -193,6 +193,7 @@ class _AddRentalCarState extends State<AddRentalCar> {
                       .then((value) {
                     nameController.clear();
                     seatsController.clear();
+                    priceController.clear();
                     urlDownload = '';
                   }).then((value) => {
                             ScaffoldMessenger.of(context).showSnackBar(

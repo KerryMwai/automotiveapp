@@ -106,16 +106,9 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                                       SingleChildScrollView(
                                                     child: Column(
                                                       children: [
-                                                        const Padding(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  18.0),
-                                                          child: TextField(
-                                                            controller: null,
-                                                          ),
-                                                        ),
+
                                                         const SizedBox(
-                                                          height: 10,
+                                                          height: 20,
                                                         ),
                                                         Padding(
                                                           padding:

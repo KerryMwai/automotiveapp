@@ -94,17 +94,7 @@ class _ServiceManagerPageState extends State<ServiceManagerPage> {
                                                       SingleChildScrollView(
                                                     child: Column(
                                                       children: [
-                                                        const Padding(
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  18.0),
-                                                          child: TextField(
-                                                            controller: null,
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 10,
-                                                        ),
+                                                        const SizedBox(height: 20,),
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets

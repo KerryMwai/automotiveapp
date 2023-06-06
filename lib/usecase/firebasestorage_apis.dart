@@ -187,4 +187,9 @@ class FirebaseStorageApis {
         .then((value) => print("Renting doc Deleted"))
         .catchError((error) => print("Failed to delete renting doc: $error"));
   }
+
+  Future<void> addTocart(String name, String id)async{
+    // CollectionReference cartRef=firestorInstance.collection("carts");
+    
+  }
 }

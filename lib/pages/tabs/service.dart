@@ -40,7 +40,7 @@ class _ServicesPageState extends State<ServicesPage> {
 
             return GridView.count(
                 crossAxisCount: 2,
-                childAspectRatio: 2 / 3,
+                childAspectRatio: 3 / 5,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
                 children: List.generate(serviceDocs.length, (index) {
