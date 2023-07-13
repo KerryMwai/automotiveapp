@@ -21,4 +21,12 @@ class UserAuthorization{
       return false;
     }
   }
+
+  Future<void> signOutUser()async{
+    try{
+        await firebaseAuth.signOut();
+    }catch(e){
+      print(e);
+    }
+  }
 }

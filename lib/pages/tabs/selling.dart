@@ -1,6 +1,7 @@
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/firebase/storage_service.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
@@ -22,8 +23,8 @@ class _SellingPageState extends State<SellingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<FirebaseFile>>(
-        future: services,
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseStorageApis().fetchAllSellItems(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -34,14 +35,14 @@ class _SellingPageState extends State<SellingPage> {
           }
 
           if (snapshot.hasData) {
-            final files = snapshot.data;
+            final sellItems = snapshot.data!.docs;
             return GridView.count(
                 crossAxisCount: 2,
                 childAspectRatio: 2 / 3,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                children: List.generate(files!.length, (index) {
-                  final file=files[index];
+                children: List.generate(sellItems.length, (index) {
+                  final sellItem=sellItems[index];
                   return Container(
                     margin: const EdgeInsets.only(left: 5, top: 10, right: 5),
                     padding: const EdgeInsets.all(20),
@@ -58,7 +59,7 @@ class _SellingPageState extends State<SellingPage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
-                                image: NetworkImage(file.url),
+                                image: NetworkImage(sellItem['url']),
                                 fit: BoxFit.cover,
                               )),
                         ),
@@ -75,7 +76,7 @@ class _SellingPageState extends State<SellingPage> {
                               width: 4,
                             ),
                             Text(
-                              "4.9",
+                              "${sellItem['rate']}",
                               style: TextStyle(
                                   color: white.withOpacity(0.6), fontSize: 18),
                             )
@@ -84,9 +85,9 @@ class _SellingPageState extends State<SellingPage> {
                         const SizedBox(
                           height: 5,
                         ),
-                        const Text(
-                          "Piston ring",
-                          style: TextStyle(
+                         Text(
+                          sellItem['name'],
+                          style: const TextStyle(
                               color: white, fontFamily: "Roboto", fontSize: 19),
                         ),
                         const SizedBox(
@@ -95,9 +96,9 @@ class _SellingPageState extends State<SellingPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              "\$ 450",
-                              style:  TextStyle(
+                             Text(
+                              "\$ ${sellItem['price']}",
+                              style:  const TextStyle(
                                   color: white,
                                   fontFamily: "Roboto",
                                   fontSize: 19),

@@ -1,5 +1,5 @@
 import 'package:automotiveapp/constants/colors.dart';
-import 'package:automotiveapp/firebase/storage_service.dart';
+import 'package:automotiveapp/models/selling_model.dart';
 import 'package:automotiveapp/pages/tabs/custom_drawer.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,16 +14,19 @@ class SellManagerPage extends StatefulWidget {
 }
 
 class _SellManagerPageState extends State<SellManagerPage> {
-  late Future<List<FirebaseFile>> sellings;
-  @override
-  void initState() {
-    super.initState();
-    sellings = FirebaseStorageApis.fetchAllrentalSellingmages();
-  }
-
+  // late Future<List<FirebaseFile>> sellings;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   sellings = FirebaseStorageApis.fetchAllrentalSellingmages();
+  // }
+  TextEditingController nameController = TextEditingController();
+  TextEditingController rateController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: black,
         appBar: AppBar(
           backgroundColor: blackfade,
           title: const Text("Selling manager"),
@@ -81,13 +84,137 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                 Row(
                                   children: [
                                     IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                final String name =
+                                                    singledoc['name'];
+                                                final String rate =
+                                                    singledoc['rate']
+                                                        .toString();
+                                                final String price =
+                                                    singledoc['price']
+                                                        .toString();
+                                                nameController.text = name;
+                                                rateController.text = rate;
+                                                priceController.text = price;
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      "Update Rental Car"),
+                                                  content:
+                                                      SingleChildScrollView(
+                                                    child: Column(
+                                                      children: [
+
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(18.0),
+                                                          child: TextField(
+                                                            controller:
+                                                                nameController,
+                                                            decoration:
+                                                                const InputDecoration(
+                                                                    hintText:
+                                                                        "Name"),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(18.0),
+                                                          child: TextField(
+                                                            controller:
+                                                                rateController,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
+                                                            decoration:
+                                                                const InputDecoration(
+                                                              hintText: "Rate",
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(18.0),
+                                                          child: TextField(
+                                                            controller:
+                                                                priceController,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
+                                                            decoration:
+                                                                const InputDecoration(
+                                                              hintText: "Price",
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  actions: [
+                                                    ElevatedButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: const Text(
+                                                            "Cancel")),
+                                                    ElevatedButton(
+                                                        onPressed: () {
+                                                          FirebaseStorageApis()
+                                                              .updateProduct(
+                                                                  singledoc.id,
+                                                                  SellingModel(
+                                                                      name: nameController
+                                                                          .text,
+                                                                      rate: double.parse(
+                                                                          rateController
+                                                                              .text),
+                                                                      price: double.parse(
+                                                                          priceController
+                                                                              .text),
+                                                                      url:
+                                                                          "https://media.istockphoto.com/id/528679231/photo/auto-parts.jpg?s=1024x1024&w=is&k=20&c=Ilxyx0tJCzRjqg47N9oReerDBdexnwysJpG3FQtG9T0=",
+                                                                      imageName:
+                                                                          "spare-demo.jpg"))
+                                                              .then((value) => {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(const SnackBar(
+                                                                            content:
+                                                                                Text("Selling updated successfully")))
+                                                                  })
+                                                              .then((value) =>
+                                                                  Navigator.pop(
+                                                                      context));
+                                                        },
+                                                        child: const Text(
+                                                            "Update")),
+                                                  ],
+                                                );
+                                              });
+                                        },
                                         icon: const Icon(
                                           Icons.edit,
                                           color: Colors.green,
                                         )),
                                     IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          FirebaseStorageApis().deleteSellingDocument(singledoc.id);
+                                        },
                                         icon: const Icon(
                                           Icons.delete,
                                           color: Colors.red,
@@ -99,9 +226,9 @@ class _SellManagerPageState extends State<SellManagerPage> {
                             const SizedBox(
                               height: 20,
                             ),
-                             Column(
+                            Column(
                               children: [
-                                   Align(
+                                Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     singledoc['name'],
@@ -111,12 +238,12 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
-                                 const SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                       MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "\$ ${singledoc['price']}",
@@ -134,13 +261,11 @@ class _SellManagerPageState extends State<SellManagerPage> {
                                         const SizedBox(
                                           width: 6,
                                         ),
-                                       Text(singledoc['rate'].toString())
+                                        Text(singledoc['rate'].toString())
                                       ],
                                     )
                                   ],
                                 ),
-                               
-                             
                               ],
                             ),
                             const SizedBox(

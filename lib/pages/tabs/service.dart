@@ -1,6 +1,7 @@
 import 'package:automotiveapp/constants/colors.dart';
 import 'package:automotiveapp/firebase/storage_service.dart';
 import 'package:automotiveapp/usecase/firebasestorage_apis.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:line_icons/line_icons.dart';
@@ -24,8 +25,8 @@ class _ServicesPageState extends State<ServicesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<FirebaseFile>>(
-        future: servicesFromFirebaseStorage,
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseStorageApis().fetchAllServices(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -35,15 +36,15 @@ class _ServicesPageState extends State<ServicesPage> {
             );
           }
           if (snapshot.hasData) {
-            final files = snapshot.data;
+            final serviceDocs = snapshot.data!.docs;
 
             return GridView.count(
                 crossAxisCount: 2,
-                childAspectRatio: 2 / 3,
+                childAspectRatio: 3 / 5,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                children: List.generate(snapshot.data!.length, (index) {
-                  final file = files![index];
+                children: List.generate(serviceDocs.length, (index) {
+                  final service = serviceDocs[index];
                   return Stack(children: [
                     Container(
                       margin: const EdgeInsets.only(left: 5, top: 10, right: 5),
@@ -61,7 +62,7 @@ class _ServicesPageState extends State<ServicesPage> {
                                     topLeft: Radius.circular(10),
                                     topRight: Radius.circular(10)),
                                 image: DecorationImage(
-                                    image: NetworkImage(file.url),
+                                    image: NetworkImage(service['url']),
                                     fit: BoxFit.fill)),
                           ),
                           const SizedBox(
@@ -102,9 +103,9 @@ class _ServicesPageState extends State<ServicesPage> {
                           const SizedBox(
                             height: 5,
                           ),
-                          const Text(
-                            "Repair",
-                            style:  TextStyle(
+                           Text(
+                            service['name'],
+                            style:  const TextStyle(
                                 color: white,
                                 fontFamily: "Roboto",
                                 fontSize: 19),

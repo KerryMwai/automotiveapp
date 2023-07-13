@@ -84,6 +84,10 @@ class _SignInPageState extends State<SignInPage> {
                             .signInUser(UserModel(
                                 userEmail: emailController.text,
                                 userPassword: passwordController.text))
+                                .then((value) {
+                                  emailController.clear();
+                                  passwordController.clear();
+                                })
                             .then((value) => context.go("/Home"))
                             .catchError((e) => print(e));
                       },

@@ -1,4 +1,6 @@
 import 'package:automotiveapp/constants/colors.dart';
+import 'package:automotiveapp/firebase/user_authority.dart';
+import 'package:automotiveapp/pages/signin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,7 +41,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             padding: const EdgeInsets.only(left: 15),
             child: GestureDetector(
               onTap: () {},
-              child: const Row(
+              child:  const Row(
                 children: [
                   Icon(Icons.person, color: white,),
                   SizedBox(
@@ -61,7 +63,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               onTap: () {
                 context.go("/Home");
               },
-              child: const Row(
+              child:  const Row(
                 children: [
                   Icon(Icons.home, color: white,),
                   SizedBox(
@@ -83,8 +85,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
               onTap: () {
                 context.go("/service_management");
               },
-              child: const Row(
-                children: [
+              child:  const Row(
+                children:[
                   Icon(Icons.credit_card, color: white,),
                   SizedBox(
                     width: 15,
@@ -105,7 +107,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               onTap: () {
                 context.go("/rent_management");
               },
-              child: const Row(
+              child:  const Row(
                 children: [
                   Icon(Icons.car_rental, color: white,),
                   SizedBox(
@@ -127,8 +129,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
               onTap: () {
                 context.go("/selling_management");
               },
-              child: const Row(
-                children: [
+              child:  const Row(
+                children:[
                   Icon(Icons.credit_score, color: white,),
                   SizedBox(
                     width: 15,
@@ -147,10 +149,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
             padding: const EdgeInsets.only(left: 15),
             child: GestureDetector(
               onTap: () {
-
-                context.go("/");
+                  UserAuthorization().signOutUser().then((value) => Navigator.push(context,MaterialPageRoute(builder: (_)=>const SignInPage())));
               },
-              child: const Row(
+              child:  const Row(
                 children: [
                   Icon(Icons.logout, color: white,),
                   SizedBox(
